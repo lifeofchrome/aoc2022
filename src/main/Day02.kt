@@ -1,3 +1,6 @@
+package main
+import readInput
+
 fun main() {
     val input = readInput("Day02")
     val day2 = Day02(input)
@@ -16,13 +19,13 @@ class Day02(private val input: List<String>) {
                 'A' -> Shape.ROCK
                 'B' -> Shape.PAPER
                 'C' -> Shape.SCISSORS
-                else -> throw IllegalStateException("Opponent's shape is invalid: $round")
+                else -> error("Opponent's shape is invalid: $round")
             }
             second = when (round[2]) {
                 'X' -> Shape.ROCK
                 'Y' -> Shape.PAPER
                 'Z' -> Shape.SCISSORS
-                else -> throw IllegalStateException("Player's shape is invalid: $round")
+                else -> error("Player's shape is invalid: $round")
             }
             rounds.add(Pair(first, second))
         }
