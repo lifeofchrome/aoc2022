@@ -20,9 +20,12 @@ tasks {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation(kotlin("test"))
+    testImplementation(kotlin("src"))
 }
