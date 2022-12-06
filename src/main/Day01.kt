@@ -5,8 +5,8 @@ fun main() {
     print("Part 1: ${day1.part1()}\n")
     print("Part 2: ${day1.part2()}")
 }
-class Day01(val input: List<String>) {
-    val elves = mutableListOf<Int>()
+class Day01(private val input: List<String>) {
+    private val elves = mutableListOf<Int>()
     fun calculateElves() {
         var current = 0
         for (line in input) {
