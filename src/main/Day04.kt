@@ -19,11 +19,11 @@ class Day04(input: List<String>) {
         }
     }
 
-    private fun process(how: (IntRange, IntRange) -> Boolean) = ranges.count { how(it.first, it.second) }
     private fun rangeFullOverlap(first: IntRange, second: IntRange) =
         first.toSet().containsAll(second.toSet()) || second.toSet().containsAll(first.toSet())
     private fun rangePartialOverlap(first: IntRange, second: IntRange) =
         first.toSet().intersect(second.toSet()).isNotEmpty()
-    fun part1() = process(this::rangeFullOverlap)
-    fun part2() = process(this::rangePartialOverlap)
+
+    fun part1() = ranges.count { rangeFullOverlap(it.first, it.second) }
+    fun part2() = ranges.count { rangePartialOverlap(it.first, it.second) }
 }
