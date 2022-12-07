@@ -20,13 +20,7 @@ class Day04(input: List<String>) {
     }
 
     private fun process(how: (IntRange, IntRange) -> Boolean): Int {
-        var matches = 0
-        for(group in ranges) {
-            if(how(group.first, group.second)) {
-                matches++
-            }
-        }
-        return matches
+        return ranges.count { how(it.first, it.second) }
     }
 
     private fun rangeFullOverlap(first: IntRange, second: IntRange) : Boolean {
