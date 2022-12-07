@@ -9,17 +9,13 @@ fun main() {
 }
 class Day04(input: List<String>) {
 
-    private var ranges = mutableListOf<Pair<IntRange, IntRange>>()
+    private val ranges : List<Pair<IntRange, IntRange>>
     init {
-        val extractRanges = Regex("(\\d+)-(\\d+),(\\d+)-(\\d+)")
-        for(line in input) {
-            val results = extractRanges.matchEntire(line) ?: error("Unable to extract ranges for pair: $line")
-            if (results.groupValues.size < 4) {
-                error("Not enough values for pair: $line")
-            }
-            val first = results.groupValues[1].toInt()..results.groupValues[2].toInt()
-            val second = results.groupValues[3].toInt()..results.groupValues[4].toInt()
-            ranges.add(Pair(first, second))
+        ranges = input.map { line ->
+            val (p1, p2) = line.split(',')
+            val (p1start, p1end) = p1.split('-').map { it.toInt() }
+            val (p2start, p2end) = p2.split('-').map { it.toInt() }
+            return@map Pair(p1start..p1end, p2start..p2end)
         }
     }
 
@@ -34,12 +30,11 @@ class Day04(input: List<String>) {
     }
 
     private fun rangeFullOverlap(first: IntRange, second: IntRange) : Boolean {
-        return (first.first in second && first.last in second) ||
-                (second.first in first && second.last in first)
+        return first.toSet().containsAll(second.toSet()) || second.toSet().containsAll(first.toSet())
     }
 
     private fun rangePartialOverlap(first: IntRange, second: IntRange) : Boolean {
-        return (first.first in second) || (first.last in second) || (second.first in first) || (second.last in first)
+        return first.toSet().intersect(second.toSet()).isNotEmpty()
     }
 
     fun part1() = process(this::rangeFullOverlap)
