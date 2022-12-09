@@ -60,34 +60,26 @@ class Day08(input: List<String>) {
     private fun List<List<Int>>.viewDistances(row: Int, col: Int): List<Int> {
         val results = MutableList(4) { 0 }
         for(i in row - 1 downTo 0 ) { // up
-            if(this[i][col] < this[row][col]) {
-                results[0]++
-            } else {
-                results[0]++
+            results[0]++
+            if(this[i][col] >= this[row][col]) {
                 break
             }
         }
         for(i in row + 1 until this.size) { // down
-            if(this[i][col] < this[row][col]) {
-                results[1]++
-            } else {
-                results[1]++
+            results[1]++
+            if(this[i][col] >= this[row][col]) {
                 break
             }
         }
         for(i in col - 1 downTo 0) { // left
-            if(this[row][i] < this[row][col]) {
-                results[2]++
-            } else {
-                results[2]++
+            results[2]++
+            if(this[row][i] >= this[row][col]) {
                 break
             }
         }
         for(i in col + 1 until this[row].size) { // right
-            if(this[row][i] < this[row][col]) {
-                results[3]++
-            } else {
-                results[3]++
+            results[3]++
+            if(this[row][i] >= this[row][col]) {
                 break
             }
         }
